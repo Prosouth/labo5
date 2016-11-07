@@ -15,8 +15,16 @@
 
 using namespace std;
 
+bool estBissextile(int annee);
+
 int main(int argc, char** argv) {
 
     return 0;
+}
+
+
+bool estBissextile(int annee)
+{
+    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
 }
 
