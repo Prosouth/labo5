@@ -1,19 +1,55 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ -----------------------------------------------------------------------------------
+ Laboratoire : 
+ Fichier     : main.cpp
+ Auteur(s)   : Corazza Erick, Sebastien Saez
+ Date        : Novembre 2016
 
-/* 
- * File:   main.cpp
- * Author: Erick Corazza et Sébastien Saez
- *
- * Created on 7 novembre 2016, 11:12
+ But         : 
+
+ Remarque(s) : 
+
+ Compilateur : MinGW-g++ 5.3.0
+ -----------------------------------------------------------------------------------
  */
 
 #include <cstdlib>
 
 using namespace std;
+
+/**
+ l'annee est elle Bissextile
+ 
+ @param n entier >=1600 et <=3000 
+ 
+ @return true or false
+ */
+bool bissextile(int annee);
+
+
+/**
+ l'annee est elle valide
+ 
+ @param n entier >=1600 et <=3000 
+ 
+ @return true or false
+ */
+bool anneeValide(int annee);
+
+
+/**
+ l'annee est elle Bissextile
+ 
+ @param n entier >=1600 et <=3000 
+ 
+ @return true or false
+ */
+void saisieUtilisateur(string question, string erreur, int min, int max);
+
+int premierJanvier(int annee);
+
+
+
 
 int main(int argc, char** argv) {
 
