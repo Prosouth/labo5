@@ -6,7 +6,7 @@
 
 /* 
  * File:   main.cpp
- * Author: Erick Corazza
+ * Author: Erick Corazza et Sébastien Saez
  *
  * Created on 7 novembre 2016, 11:12
  */
