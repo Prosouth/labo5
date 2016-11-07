@@ -56,3 +56,13 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+
+bool estBissextile(int annee)
+{
+    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
+}
+
+bool jourValide(int jour)
+{
+    return (jour > 0 && jour <= 7) ? true : false;
+}
