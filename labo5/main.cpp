@@ -45,20 +45,18 @@ bool anneeValide(int annee);
  
  @param question(string) demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
  @param erreur(string) message d'erreur en cas d'entree(s) non valide
- @param min(entier) definit le mimimum
- @param min(entier) definit le maximum
- 
- @return true or false
+ @param min(entier) definit le nombre mimimum a entrer
+ @param min(entier) definit le nombre maximum a entrer
  */
 void saisieUtilisateur(string question, string erreur, int min, int max);
 
 
 /**
- l'annee est elle Bissextile
+ Premier janvier de chaque annee
  
  @param n entier >=1600 et <=3000 
  
- @return true or false
+ @return le jour de la semaine correspondant au premier lundi de l'annee(1-7)
  */
 int premierJanvier(int annee);
 
