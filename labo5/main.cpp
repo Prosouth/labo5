@@ -43,8 +43,10 @@ bool anneeValide(int annee);
 /**
  demande les valeurs a l'utilisateur et verifie la saisie
  
- @param question string demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
- param
+ @param question(string) demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
+ @param erreur(string) message d'erreur en cas d'entree(s) non valide
+ @param min(entier) definit le mimimum
+ @param min(entier) definit le maximum
  
  @return true or false
  */
