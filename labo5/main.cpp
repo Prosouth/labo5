@@ -14,6 +14,9 @@
  */
 
 #include <cstdlib>
+#include <string>
+#include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -24,7 +27,7 @@ using namespace std;
  
  @return true or false
  */
-bool bissextile(int annee);
+bool estBissextile(int annee);
 
 
 /**
@@ -38,14 +41,23 @@ bool anneeValide(int annee);
 
 
 /**
+ demande les valeurs a l'utilisateur et verifie la saisie
+ 
+ @param question string demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
+ param
+ 
+ @return true or false
+ */
+void saisieUtilisateur(string question, string erreur, int min, int max);
+
+
+/**
  l'annee est elle Bissextile
  
  @param n entier >=1600 et <=3000 
  
  @return true or false
  */
-void saisieUtilisateur(string question, string erreur, int min, int max);
-
 int premierJanvier(int annee);
 
 
@@ -65,4 +77,10 @@ bool estBissextile(int annee)
 bool jourValide(int jour)
 {
     return (jour > 0 && jour <= 7) ? true : false;
+}
+
+
+void saisieUtilisateur(string question, string erreur, int min, int max)
+{
+    
 }
