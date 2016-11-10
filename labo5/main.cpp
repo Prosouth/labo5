@@ -17,8 +17,12 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
+
+// on cree une enumeration des jours de la semaine avec dimanche ayant la valeur de 1 jusqu'a 7 pour samedi
+enum JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
 
 /**
  l'annee est elle Bissextile
@@ -54,18 +58,23 @@ void saisieUtilisateur(string question, string erreur, int min, int max);
 /**
  Premier janvier de chaque annee
  
- @param n entier >=1600 et <=3000 
+ * formule valable pour l'annee 1583 a 9999
+ @param annee(entier) >=1600 et <=3000 
  
- @return le jour de la semaine correspondant au premier lundi de l'annee(1-7)
+ @return le jour de la semaine correspondant au premier lundi de l'annee(1-7) avec dim=1, lundi=2, etc
  */
-int premierJanvier(int annee);
+int premierJourJanvier(int annee);
 
 
 
 
 int main(int argc, char** argv)
 {
+    int annee ;
+    cout << "entrez une annee :  ";
+    cin >> annee ;
     
+    cout << "le premier jour de la semaine de l'annee " << annee << "tombe un(1-dim, 2-lun,etc) : " << premierJanvier(annee) << endl;
     
     return 0;
 }
@@ -96,4 +105,32 @@ bool anneeValide(int annee)
     }
     
     return true;
+}
+
+// la formule a utiliser est la suivante : j = [ jour + a + a/4 - a/100 + a/400 + 31*m/12 ] mod 7
+int premierJourJanvier(int annee)
+{
+    // nombre de jours dans une semaine
+    const int nbJourSemaine = 7 ;
+    
+    // jour represente le jour dans le mois
+    int jour = 1 ;
+   
+    // mois represente le numero du mois, ici pour janvier -> 1
+    int mois = 1 ;
+    
+    // une constante qui vaut 1 si il s'agit de janvier ou fevrier et qui vaut 0 pour tous les autres mois
+    int constante = 1;
+    
+    int m = mois + 12*constante - 2 ;
+    
+    // a vaut annee-1 si on calcule le premier jour de mois de janv. ou fev. et annee pour les autres mois
+    int a = annee - constante ;
+    
+    // on utilise la formule pour affecter son resultat a la variable premierJour
+    int premierJour = ( jour + a + a/4 - a/100 + a/400 + 31*m/12 ) % nbJourSemaine ;
+    
+    // on retourne le resultat de la formule + 1 car on veut obtenir les indices de 1-7 et non pas de 0-6
+    return premierJour + 1;
+    
 }
