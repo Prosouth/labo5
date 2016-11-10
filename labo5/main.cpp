@@ -63,8 +63,10 @@ int premierJanvier(int annee);
 
 
 
-int main(int argc, char** argv) {
-
+int main(int argc, char** argv)
+{
+    
+    
     return 0;
 }
 
@@ -83,4 +85,15 @@ bool jourValide(int jour)
 void saisieUtilisateur(string question, string erreur, int min, int max)
 {
     
+}
+
+bool anneeValide(int annee)
+{
+    if(1600 > annee || annee > 3000 )
+    {
+        cout << "Entree non valide" << endl ;
+        return false;
+    }
+    
+    return true;
 }
