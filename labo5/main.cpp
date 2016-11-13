@@ -1,15 +1,19 @@
 /*
  -----------------------------------------------------------------------------------
- Laboratoire : 
- Fichier     : main.cpp
+ Laboratoire : 5 - Calendrier
+ Fichier     : labo5_corazza_saez.cpp
  Auteur(s)   : Corazza Erick, Sebastien Saez
- Date        : Novembre 2016
+ Date        : 7 Novembre 2016
 
- But         : 
+ But         : Le but de ce laboratoire est d'afficher dans la console le calendrier 
+ *             d'une année. Vous demandez à l'utilisateur de rentrer une année entre
+ *             1600 et 3000, et la place du lundi dans l'ordre des 7 jours de la 
+ *             semaine (entre 1 et 7). En sortie, vous affichez par exemple pour 2016 
+ *             et le lundi en position 1.
 
  Remarque(s) : 
 
- Compilateur : MinGW-g++ 5.3.0
+ Compilateur : g++ 
  -----------------------------------------------------------------------------------
  */
 
@@ -25,6 +29,10 @@ using namespace std;
 enum JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
 
 enum Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
+
+// Constatntes 
+const int BORNE_ANNEE_MINIMALE = 1600,
+          BORNE_ANNEE_MAXIMALE = 3000,
 
 /**
  l'annee est elle Bissextile
