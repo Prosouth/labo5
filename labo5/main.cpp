@@ -24,6 +24,8 @@ using namespace std;
 // on cree une enumeration des jours de la semaine avec dimanche ayant la valeur de 1 jusqu'a 7 pour samedi
 enum JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
 
+enum Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
+
 /**
  l'annee est elle Bissextile
  
@@ -65,6 +67,14 @@ void saisieUtilisateur(string question, string erreur, int min, int max);
  */
 int premierJourJanvier(int annee);
 
+/**
+ * Affiche le mois dans une annee donnee 
+
+ @param mois(entier)   compris entre 1 et 12
+ @param annee(entier) >=1600 et <=3000 
+ @return l'affichage du mois
+ */
+void affichageMois(int mois, int annee);
 
 
 
@@ -133,4 +143,14 @@ int premierJourJanvier(int annee)
     // on retourne le resultat de la formule + 1 car on veut obtenir les indices de 1-7 et non pas de 0-6
     return premierJour + 1;
     
+}
+
+
+void affichageMois(int mois, int annee)
+{
+    
+    for(int i = JANVIER ; i <= mois ; i++)
+    {
+        
+    }
 }
