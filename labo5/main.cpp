@@ -22,13 +22,14 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
 
 using namespace std;
 
 // on cree une enumeration des jours de la semaine avec dimanche ayant la valeur de 1 jusqu'a 7 pour samedi
-enum JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
+enum class JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
 
-enum Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
+enum class Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
 
 // Constatntes 
 const int BORNE_ANNEE_MINIMALE = 1600,
@@ -92,7 +93,6 @@ int main(int argc, char** argv)
     cout << "entrez une annee :  ";
     cin >> annee ;
     
-    cout << "le premier jour de la semaine de l'annee " << annee << "tombe un(1-dim, 2-lun,etc) : " << premierJanvier(annee) << endl;
     
     return 0;
 }
@@ -130,7 +130,7 @@ bool anneeValide(int annee)
 {
     if(1600 > annee || annee > 3000 )
     {
-        cout << "Entree non valide" << endl ;
+        cout << "Entree non valide" << endl;
         return false;
     }
     
@@ -141,36 +141,31 @@ bool anneeValide(int annee)
 int premierJourJanvier(int annee)
 {
     // nombre de jours dans une semaine
-    const int nbJourSemaine = 7 ;
+    const int nbJourSemaine = 7;
     
     // jour represente le jour dans le mois
-    int jour = 1 ;
+    int jour = 1;
    
     // mois represente le numero du mois, ici pour janvier -> 1
-    int mois = 1 ;
+    int mois = 1;
     
     // une constante qui vaut 1 si il s'agit de janvier ou fevrier et qui vaut 0 pour tous les autres mois
     int constante = 1;
     
-    int m = mois + 12*constante - 2 ;
+    int m = mois + 12 * constante - 2;
     
     // a vaut annee-1 si on calcule le premier jour de mois de janv. ou fev. et annee pour les autres mois
-    int a = annee - constante ;
+    int a = annee - constante;
     
     // on utilise la formule pour affecter son resultat a la variable premierJour
-    int premierJour = ( jour + a + a/4 - a/100 + a/400 + 31*m/12 ) % nbJourSemaine ;
+    int premierJour = (jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12 ) % nbJourSemaine;
     
     // on retourne le resultat de la formule + 1 car on veut obtenir les indices de 1-7 et non pas de 0-6
-    return premierJour + 1;
-    
+    return premierJour + 1; 
 }
 
 
 void affichageMois(int mois, int annee)
 {
-    
-    for(int i = JANVIER ; i <= mois ; i++)
-    {
-        
-    }
+   
 }
