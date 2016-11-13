@@ -103,7 +103,19 @@ bool jourValide(int jour)
 
 void saisieUtilisateur(string question, string erreur, int min, int max)
 {
-    
+   int valeur;
+   bool entree_valide = false;
+   cout << question << endl;   
+   
+   do
+   {
+      if (entree_valide = (not(cin >> valeur) || (valeur <  min ||  valeur > max)))
+      {
+         cout << erreur << endl;
+         cin.clear();
+         cin.ignore(numeric_limits<int>::max(), '\n');
+      }      
+   } while(entree_valide);    
 }
 
 bool anneeValide(int annee)
