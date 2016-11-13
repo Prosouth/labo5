@@ -32,7 +32,7 @@ enum Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE,
 
 // Constatntes 
 const int BORNE_ANNEE_MINIMALE = 1600,
-          BORNE_ANNEE_MAXIMALE = 3000,
+          BORNE_ANNEE_MAXIMALE = 3000;
 
 /**
  l'annee est elle Bissextile
