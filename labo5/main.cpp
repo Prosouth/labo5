@@ -26,12 +26,25 @@
 
 using namespace std;
 
-// on cree une enumeration des jours de la semaine avec dimanche ayant la valeur de 1 jusqu'a 7 pour samedi
-enum class JourDeLaSemaine {DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI};
+// on crée une énumération des jours de la semaine avec dimanche ayant la valeur de 1 
+// jusqu'a 7 pour samedi
+enum class JourDeLaSemaine 
+{
+   DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI
+};
 
-enum class Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE};
+enum class Mois 
+{
+   JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, 
+   OCTOBRE, NOVEMBRE, DECEMBRE
+};
 
-enum class JourParMois {};
+enum class JourParMois 
+{
+   JANVIER = 31, FEVRIER = 28, MARS = 31, AVRIL = 30, MAI = 31, JUIN = 30, 
+   JUILLET = 31, AOUT = 31, SEPTEMBRE = 30, OCTOBRE = 31, NOVEMBRE = 30,
+   DECEMBRE = 31
+};
 
 // Constantes 
 const int BORNE_ANNEE_MINIMALE = 1600,
