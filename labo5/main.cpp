@@ -266,6 +266,12 @@ void affichageCentreMois(int mois, int premierJourSemaine)
     
 }
 
+
+void affichageCentreJour(int jour)
+{
+    
+}
+
 void affichageAnnee(int annee)
 {
     for(int i = 1 ; i <= 12; i++)
