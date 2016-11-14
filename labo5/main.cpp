@@ -21,7 +21,6 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <limits>
 
 using namespace std;
@@ -61,16 +60,6 @@ const int BORNE_ANNEE_MINIMALE = 1600,
  @return true or false
  */
 bool estBissextile(int annee);
-
-
-/**
- l'annee est elle valide
- 
- @param n entier >=1600 et <=3000 
- 
- @return true or false
- */
-bool anneeValide(int annee);
 
 
 /**
@@ -159,16 +148,7 @@ void saisieUtilisateur(string question, string erreur, int min, int max)
    } while(entree_valide);    
 }
 
-bool anneeValide(int annee)
-{
-    if(BORNE_ANNEE_MINIMALE > annee || annee > BORNE_ANNEE_MAXIMALE )
-    {
-        cout << "Entree non valide" << endl;
-        return false;
-    }
-    
-    return true;
-}
+
 
 // la formule a utiliser est la suivante : j = [ jour + a + a/4 - a/100 + a/400 + 31*m/12 ] mod 7
 int premierJourJanvier(int annee)
