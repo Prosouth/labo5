@@ -184,41 +184,43 @@ void affichageCentreMois(int mois, int premierJourSemaine)
     cout << setw(LARGEUR_MOIS);
     switch(mois)
     {
-        case 1 : 
+       case (int)Mois::JANVIER : 
            cout << "Janvier" << endl;
            break;
+        case (int)Mois::FEVRIER : 
+           cout << "Février" << endl;
         case 2 : 
            cout << "Fevrier" << endl;
            break;
-        case 3 : 
+        case (int)Mois::MARS : 
            cout << "Mars" << endl;
            break;
-        case 4 : 
+        case (int)Mois::AVRIL : 
            cout << "Avril" << endl; 
            break;
-        case 5 : 
+        case (int)Mois::MAI : 
            cout << "Mai" << endl; 
            break;
-        case 6 : 
+        case (int)Mois::JUIN : 
            cout << "Juin"  << endl; 
            break;
-        case 7 : 
+        case (int)Mois::JUILLET : 
            cout << "Juillet" << endl; 
            break;
-        case 8 : 
-           cout << "Aout" << endl; 
+        case (int)Mois::AOUT : 
+           cout << "Août" << endl; 
            break;
-        case 9 : 
+        case (int)Mois::SEPTEMBRE : 
            cout << "Septembre" << endl; 
            break;
-        case 10: 
+        case (int)Mois::OCTOBRE: 
            cout << "Octobre" << endl; 
            break;
-        case 11: 
+        case (int)Mois::NOVEMBRE: 
            cout << "Novembre" << endl; 
            break;
-        case 12: 
-           cout << "Decembre" << endl; 
+        case (int)Mois::DECEMBRE: 
+           cout << "Décembre" << endl; 
            break;
     }
     
