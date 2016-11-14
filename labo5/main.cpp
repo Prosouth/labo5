@@ -67,6 +67,14 @@ void saisieUtilisateur(string question, string erreur, int min, int max);
 
 
 /**
+ Affiche les dates d'un mois en les centrant correctement
+ @param colonne(entier) le nombre de colonnes à afficher
+ @param largeurColonne(entier) largeur de chaque colonne en terme de nombre de caracteres
+ */
+void affichageCentre(int colonne, int largeurColonne);
+
+
+/**
  Premier janvier de chaque annee
  
  * formule valable pour l'annee 1583 a 9999
@@ -92,6 +100,8 @@ int main(int argc, char** argv)
     int annee ;
     cout << "entrez une annee :  ";
     cin >> annee ;
+    cout << endl << anneeValide(annee);
+    cout << endl << premierJourJanvier(annee);
     
     
     return 0;
