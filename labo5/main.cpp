@@ -40,7 +40,7 @@ enum class Mois
 
 enum class JourParMois 
 {
-   JANVIER = 31, FEVRIER = 28, MARS = 31, AVRIL = 30, MAI = 31, JUIN = 30, 
+   JANVIER = 31, MARS = 31, AVRIL = 30, MAI = 31, JUIN = 30, 
    JUILLET = 31, AOUT = 31, SEPTEMBRE = 30, OCTOBRE = 31, NOVEMBRE = 30,
    DECEMBRE = 31
 };
@@ -60,16 +60,6 @@ const int BORNE_ANNEE_MINIMALE = 1600,
  @return true or false
  */
 bool estBissextile(int annee);
-
-
-/**
- l'annee est elle valide
- 
- @param n entier >=1600 et <=3000 
- 
- @return true or false
- */
-bool anneeValide(int annee);
 
 
 /**
@@ -115,16 +105,16 @@ int premierJourJanvier(int annee);
  @param annee(entier) >=1600 et <=3000 
  @return l'affichage de l'annee
  */
-void affichageAnnee(int mois, int annee);
+void affichageAnnee(int annee);
 
 
 
 int main(int argc, char** argv)
 {
     int annee ;
-    cout << "entrez un mois :  ";
+    cout << "entrez un annee :  ";
     cin >> annee ;
-    affichageCentreMois(annee, 1);
+    affichageAnnee(annee);
     
     
     return 0;
@@ -142,7 +132,7 @@ bool jourValide(int jour)
 }
 
 
-void saisieUtilisateur(string question, string erreur, int min, int max)
+void saisieUtilisateur(string question, string erreur)
 {
    int valeur;
    bool entree_valide = false;
@@ -150,7 +140,7 @@ void saisieUtilisateur(string question, string erreur, int min, int max)
    
    do
    {
-      if (entree_valide = (not(cin >> valeur) || (valeur <  min ||  valeur > max)))
+      if (entree_valide = (not(cin >> valeur) || (valeur <  BORNE_ANNEE_MINIMALE ||  valeur > BORNE_ANNEE_MAXIMALE)))
       {
          cout << erreur << endl;
          cin.clear();
@@ -159,16 +149,6 @@ void saisieUtilisateur(string question, string erreur, int min, int max)
    } while(entree_valide);    
 }
 
-bool anneeValide(int annee)
-{
-    if(BORNE_ANNEE_MINIMALE > annee || annee > BORNE_ANNEE_MAXIMALE )
-    {
-        cout << "Entree non valide" << endl;
-        return false;
-    }
-    
-    return true;
-}
 
 // la formule a utiliser est la suivante : j = [ jour + a + a/4 - a/100 + a/400 + 31*m/12 ] mod 7
 int premierJourJanvier(int annee)
@@ -240,25 +220,25 @@ void affichageCentreMois(int mois, int premierJourSemaine)
     switch(premierJourSemaine)
     {
         case (int)JourDeLaSemaine::LUNDI - 1:
-            cout << setw(LARGEUR_COLONNE) <<  "  L  M  M  J  V  S  D";
+            cout << setw(LARGEUR_COLONNE) <<  "  L  M  M  J  V  S  D" << endl;
             break;
         case (int)JourDeLaSemaine::MARDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  M  M  J  V  S  D  L";
+            cout << setw(LARGEUR_COLONNE) << "  M  M  J  V  S  D  L"<< endl;
             break;
         case (int)JourDeLaSemaine::MERCREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  M  J  V  S  D  L  M";
+            cout << setw(LARGEUR_COLONNE) << "  M  J  V  S  D  L  M"<< endl;
             break;
         case (int)JourDeLaSemaine::JEUDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  J  V  S  D  L  M  M";
+            cout << setw(LARGEUR_COLONNE) << "  J  V  S  D  L  M  M"<< endl;
             break;
         case (int)JourDeLaSemaine::VENDREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  V  S  D  L  M  M  J";
+            cout << setw(LARGEUR_COLONNE) << "  V  S  D  L  M  M  J"<< endl;
             break;
         case (int)JourDeLaSemaine::SAMEDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  S  D  L  M  M  J  V";
+            cout << setw(LARGEUR_COLONNE) << "  S  D  L  M  M  J  V"<< endl;
             break;
         case (int)JourDeLaSemaine::DIMANCHE + 6:
-            cout << setw(LARGEUR_COLONNE) << "  D  L  M  M  J  V  S";
+            cout << setw(LARGEUR_COLONNE) << "  D  L  M  M  J  V  S"<< endl;
             break;
         default:
             cout << "Il y a un probleme!" << endl;
@@ -267,15 +247,60 @@ void affichageCentreMois(int mois, int premierJourSemaine)
 }
 
 
-void affichageCentreJour(int jour, int premierJourSemaine)
-{
-    
-}
-
 void affichageAnnee(int annee)
 {
+    bool passeFevrier = false;
+    int positionDernierJour;
+    int position = (premierJourJanvier(annee) + 1) % 7;
+    if (!position)
+    {
+        position = 7;
+    }
+    
     for(int i = 1 ; i <= 12; i++)
     {
+        affichageCentreMois(i, position);
+        if (estBissextile(annee) && i == 2)
+        {
+            for (int j = 1 ; j <= 29; j++)
+            {
+                cout << setw(LARGEUR_JOUR_SEMAINE) << j;
+                if(position == 7)
+                {
+                    cout << endl;
+                    position = 1;
+                    passeFevrier = true;
+                }
+                position++;
+            }
+        }
+            
+        if (passeFevrier)
+        {
+            passeFevrier = false;
+            continue;
+        }
+        int valMax;
+        if( i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12 )
+        {
+            valMax = 31;
+        }
+        else
+        {
+            valMax = 30;
+        }
+        for(int j = 1 ; j <= valMax ; j++)
+        {
+            cout << setw(LARGEUR_JOUR_SEMAINE) << j;
+            if(position == 7)
+                {
+                    cout << endl;
+                    position = 1;
+                }
+            position++;
+            
+        }
+
         
     }
 }
