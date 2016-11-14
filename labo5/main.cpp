@@ -145,17 +145,12 @@ int premierJourJanvier(int annee)
     
     // jour represente le jour dans le mois
     int jour = 1;
-   
-    // mois represente le numero du mois, ici pour janvier -> 1
-    int mois = 1;
     
-    // une constante qui vaut 1 si il s'agit de janvier ou fevrier et qui vaut 0 pour tous les autres mois
-    int constante = 1;
-    
-    int m = mois + 12 * constante - 2;
+    // m corrrespond à la somme de 1(premier mois de l'annee) et 10 (une constante))
+    int m = 11;
     
     // a vaut annee-1 si on calcule le premier jour de mois de janv. ou fev. et annee pour les autres mois
-    int a = annee - constante;
+    int a = annee - 1;
     
     // on utilise la formule pour affecter son resultat a la variable premierJour
     int premierJour = (jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12 ) % nbJourSemaine;
