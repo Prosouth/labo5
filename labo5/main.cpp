@@ -33,12 +33,12 @@ enum class Mois {JANVIER=1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPT
 
 enum class JourParMois {};
 
-// Constatntes 
+// Constantes 
 const int BORNE_ANNEE_MINIMALE = 1600,
-          BORNE_ANNEE_MAXIMALE = 3000;
-const int LARGEUR_MOIS = 16;
-const int LARGEUR_JOUR_SEMAINE = 3;
-const int LARGEUR_COLONNE = 21;
+          BORNE_ANNEE_MAXIMALE = 3000,
+          LARGEUR_MOIS = 16,
+          LARGEUR_JOUR_SEMAINE = 3,
+          LARGEUR_COLONNE = 21;
 
 /**
  l'annee est elle Bissextile
