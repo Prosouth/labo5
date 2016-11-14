@@ -21,7 +21,6 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <limits>
 
 using namespace std;
