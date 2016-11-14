@@ -128,7 +128,7 @@ void saisieUtilisateur(string question, string erreur, int min, int max)
 
 bool anneeValide(int annee)
 {
-    if(1600 > annee || annee > 3000 )
+    if(BORNE_ANNEE_MINIMALE > annee || annee > BORNE_ANNEE_MAXIMALE )
     {
         cout << "Entree non valide" << endl;
         return false;
