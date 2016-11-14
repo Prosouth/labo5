@@ -95,8 +95,9 @@ void affichageCentreMois(int mois, int premierJourSemaine);
 /**
  Affiche et centre correctement les jours du mois
  @param jour(entier) le jour a afficher
+ @param premierJourSemaine(entier) le jour de la semaine par lequel commence chaque semaine sur le calendrier
  */
-void affichageCentreJour(int jour);
+void affichageCentreJour(int jour, int premierJourSemaine);
 
 
 /**
@@ -267,7 +268,7 @@ void affichageCentreMois(int mois, int premierJourSemaine)
 }
 
 
-void affichageCentreJour(int jour)
+void affichageCentreJour(int jour, int premierJourSemaine)
 {
     
 }
