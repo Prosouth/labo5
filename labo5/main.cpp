@@ -288,8 +288,12 @@ void affichageAnnee(int annee, int jour)
                 premiereLigne = true;
             }
             for(int co=1; co<=7; co++)
-            {
-                if(premiereLigne && (co < (positionPremierJanvier+6)) || co < dernierePos)
+            {   
+                if(premiereLigne && (co < (positionPremierJanvier+6)))
+                {
+                    cout << setw(LARGEUR_JOUR_SEMAINE) << "";
+                }
+                else if(premiereLigne && co < dernierePos)
                 {
                     cout << setw(LARGEUR_JOUR_SEMAINE) << "";
                 }
@@ -299,19 +303,20 @@ void affichageAnnee(int annee, int jour)
                     {
                         cout << setw(LARGEUR_JOUR_SEMAINE) << lol;
                         lol++;
-                        premiereLigne = false;
-                        dernierePos = co;
+                        if(lol==maxJours)
+                            dernierePos = co ;
                     }
                     else
                     {
                         cout << setw(LARGEUR_JOUR_SEMAINE) << "";
                     }
-                   
                 }  
                 
                 if(co == 7)
                 {
                     cout << endl;
+                    if(li==1)
+                        premiereLigne = false;
                 }   
             }
             
