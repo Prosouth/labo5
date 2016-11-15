@@ -179,7 +179,7 @@ int premierJourJanvier(int annee)
 }
 
 
-void affichageCentreMois(int mois, int premierJourSemaine)
+void affichageCentreMois(int mois, int premierJourSemaine, int& positionDimanche)
 {
     cout << setw(LARGEUR_MOIS);
     switch(mois)
@@ -188,8 +188,6 @@ void affichageCentreMois(int mois, int premierJourSemaine)
            cout << "Janvier" << endl;
            break;
         case (int)Mois::FEVRIER : 
-           cout << "Février" << endl;
-        case 2 : 
            cout << "Fevrier" << endl;
            break;
         case (int)Mois::MARS : 
@@ -208,7 +206,7 @@ void affichageCentreMois(int mois, int premierJourSemaine)
            cout << "Juillet" << endl; 
            break;
         case (int)Mois::AOUT : 
-           cout << "Août" << endl; 
+           cout << "Aout" << endl; 
            break;
         case (int)Mois::SEPTEMBRE : 
            cout << "Septembre" << endl; 
@@ -220,7 +218,7 @@ void affichageCentreMois(int mois, int premierJourSemaine)
            cout << "Novembre" << endl; 
            break;
         case (int)Mois::DECEMBRE: 
-           cout << "Décembre" << endl; 
+           cout << "Decembre" << endl; 
            break;
     }
     
@@ -228,25 +226,25 @@ void affichageCentreMois(int mois, int premierJourSemaine)
     switch(premierJourSemaine)
     {
         case (int)JourDeLaSemaine::LUNDI - 1:
-            cout << setw(LARGEUR_COLONNE) <<  "  L  M  M  J  V  S  D" << endl;
+            cout << setw(LARGEUR_COLONNE) <<  "  L  M  M  J  V  S  D" << endl; positionDimanche = 0; 
             break;
         case (int)JourDeLaSemaine::MARDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  D  L  M  M  J  V  S"<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  D  L  M  M  J  V  S"<< endl; positionDimanche = 1; 
             break;
         case (int)JourDeLaSemaine::MERCREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  S  D  L  M  M  J  V"<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  S  D  L  M  M  J  V"<< endl; positionDimanche = 2;
             break;
         case (int)JourDeLaSemaine::JEUDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  V  S  D  L  M  M  J"<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  V  S  D  L  M  M  J"<< endl; positionDimanche = 3;
             break;
         case (int)JourDeLaSemaine::VENDREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  J  V  S  D  L  M  M"<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  J  V  S  D  L  M  M"<< endl; positionDimanche = 4;
             break;
         case (int)JourDeLaSemaine::SAMEDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  M  J  V  S  D  L  M "<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  M  J  V  S  D  L  M "<< endl; positionDimanche = 5;
             break;
         case (int)JourDeLaSemaine::DIMANCHE + 6:
-            cout << setw(LARGEUR_COLONNE) << "  M  M  J  V  S  D  L"<< endl;
+            cout << setw(LARGEUR_COLONNE) << "  M  M  J  V  S  D  L"<< endl; positionDimanche = 6;
             break;
         default:
             cout << "Il y a un probleme!" << endl;
@@ -257,55 +255,53 @@ void affichageCentreMois(int mois, int premierJourSemaine)
 
 void affichageAnnee(int annee, int jour)
 {
-    bool passeFevrier = false;
-    int position = (premierJourJanvier(annee) + 1) % 7;
-    if (!position)
+    int dernierePos;
+    
+    int positionPremierJanvier = (premierJourJanvier(annee) + 1) % 7;
+    if (!positionPremierJanvier)
     {
-        position = 7;
-    }
+        positionPremierJanvier = 7;
+    } 
     
     for(int i = 1 ; i <= 12; i++)
     {
-        affichageCentreMois(i, jour);
-        if (estBissextile(annee) && i == 2)
+        affichageCentreMois(i, jour, dernierePos);
+        int lol = 1;
+        bool premiereLigne = false;
+        for(int li=1 ; li<= 6; li++)
         {
-            for (int j = 1 ; j <= 29; j++)
+            if(li == 1)
             {
-                cout << setw(LARGEUR_JOUR_SEMAINE) << j;
-                if(position == 7)
-                {
-                    cout << endl;
-                    position = 1;
-                    passeFevrier = true;
-                }
-                position++;
+                premiereLigne = true;
             }
-        }
-            
-        if (passeFevrier)
-        {
-            passeFevrier = false;
-            continue;
-        }
-        int valMax;
-        if( i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12 )
-        {
-            valMax = 31;
-        }
-        else
-        {
-            valMax = 30;
-        }
-        for(int j = 1 ; j <= valMax ; j++)
-        {
-            cout << setw(LARGEUR_JOUR_SEMAINE) << j;
-            if(position == 8)
+            for(int co=1; co<=7; co++)
+            {
+                if(premiereLigne)
+                {
+                    cout << setw(LARGEUR_JOUR_SEMAINE);
+                }
+                     cout << lol;
+                     lol++;
+                     premiereLigne = false;
+                }
+                if(co == 7)
                 {
                     cout << endl;
-                    position = 1;
-                }
-            position++;
-            
+                }   
+//
+//                if (co != dernierePos) 
+//                {
+//                    cout << setw(LARGEUR_JOUR_SEMAINE) << lol;
+//
+//                }
+//
+//                if (co == 7) 
+//                {
+//                    cout << endl;
+//                }
+//                lol++;
+
+            }
         }
 
         
