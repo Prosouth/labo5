@@ -263,7 +263,7 @@ void affichageAnnee(int annee, int jour)
     for(int i = 1 ; i <= 12; i++)
     {
         affichageCentreMois(i, jour);
-        int lol = 1;
+        int numeroJour = 1;
         bool premiereLigne = false;
         
         
@@ -289,22 +289,39 @@ void affichageAnnee(int annee, int jour)
             }
             for(int co=1; co<=7; co++)
             {   
-                if(premiereLigne && (co < (positionPremierJanvier+6)))
+                int indicePosition;
+                if(i == (int)Mois::JANVIER)
                 {
-                    cout << setw(LARGEUR_JOUR_SEMAINE) << "";
+                    indicePosition = premierJourJanvier(annee) - 1;
                 }
-                else if(premiereLigne && co < dernierePos)
+                else
+                {
+                    indicePosition = dernierePos - 1;
+                }
+                if(!indicePosition)
+                {
+                    indicePosition = 7;
+                }
+                
+                int indiceColonne = (indicePosition + jour - 1) % 7;
+                if(!indiceColonne)
+                {
+                    indiceColonne = 7;
+                }
+                    
+                
+                if((premiereLigne && co < indiceColonne) )
                 {
                     cout << setw(LARGEUR_JOUR_SEMAINE) << "";
                 }
                 else
                 {
-                    if(lol <= maxJours)
+                    if(numeroJour <= maxJours)
                     {
-                        cout << setw(LARGEUR_JOUR_SEMAINE) << lol;
-                        lol++;
-                        if(lol==maxJours)
-                            dernierePos = co ;
+                        cout << setw(LARGEUR_JOUR_SEMAINE) << numeroJour;
+                        numeroJour++;
+                        if(numeroJour == maxJours)
+                            dernierePos = (co + 1) % 7;
                     }
                     else
                     {
