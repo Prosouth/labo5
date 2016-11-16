@@ -42,8 +42,10 @@ const int   BORNE_ANNEE_MINIMALE = 1600,
             LARGEUR_MAX = 21,
             ESPACE_AVANT_ANNEE = 12,
             ESPACE_APRES_ANNEE = 9,
-            JOUR_FEVRIER_BISSEXTILE = 29,
-            JOUR_FEVRIER_NORMAL = 28;
+            NB_JOUR_FEVRIER_BISSEXTILE = 29,
+            NB_JOUR_FEVRIER_NORMAL = 28,
+            NB_JOUR_MOIS_CREUX = 30,
+            NB_JOUR_MOIS_PLEIN = 31;
           
 /**
  L'année est-elle bissextile?
@@ -269,14 +271,14 @@ void affichageAnnee(int annee, int jour)
     //variable contenant l'indice de la colonne du dernier jour du mois
     int dernierePos;
     //variable contenant le nombre maximum de jours par mois initialisé à 31 pour Janvier
-    int maxJours = 31;
+    int maxJours = NB_JOUR_MOIS_PLEIN;
     
     //on affiche l'année entrée par l'utilisateur suivi d'une ligne vide
     cout << endl << setw(ESPACE_AVANT_ANNEE) << annee << setw(ESPACE_APRES_ANNEE) << "" << endl;
     cout << setw(LARGEUR_MAX) << "" << endl;
     
     //on itère sur tous les mois de l'année
-    for(int i = (int)Mois::JANVIER ; i <= (int)Mois::DECEMBRE; i++)
+    for(int i = (int)Mois::JANVIER; i <= (int)Mois::DECEMBRE; i++)
     {
         //on affiche le nom du mois en cours
         affichageCentreMois(i, jour);
@@ -291,15 +293,15 @@ void affichageAnnee(int annee, int jour)
         if(i == (int)Mois::FEVRIER)
         {
             //maxJours vaudra 29 si c'est une année bissextile et 28 sinon
-            maxJours = estBissextile(annee) ? JOUR_FEVRIER_BISSEXTILE: JOUR_FEVRIER_NORMAL;
+            maxJours = estBissextile(annee) ? NB_JOUR_FEVRIER_BISSEXTILE : NB_JOUR_FEVRIER_NORMAL;
         }//sinon maxJours vaudra 30 pour les mois d'avril, mai, juin et septembre
         else if(i == (int)Mois::AVRIL || i == (int)Mois::JUIN || i == (int)Mois::SEPTEMBRE || i == (int)Mois::NOVEMBRE)
         {
-            maxJours = 30;
+            maxJours = NB_JOUR_MOIS_CREUX;
         }// sinon pour tous les autres mois maxjours vaut 31
         else
         {
-            maxJours = 31;
+            maxJours = NB_JOUR_MOIS_PLEIN;
         }
         
         //on itère de la première à la sixième ligne
