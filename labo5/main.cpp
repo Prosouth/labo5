@@ -49,6 +49,8 @@ enum class JourParMois
 // Constantes 
 const int BORNE_ANNEE_MINIMALE = 1600,
           BORNE_ANNEE_MAXIMALE = 3000,
+          BORNE_JOUR_MINIMUM = 1,
+          BORNE_JOUR_MAXIMUM = 7,
           LARGEUR_MOIS = 16,
           LARGEUR_JOUR_SEMAINE = 3,
           LARGEUR_COLONNE = 21;
@@ -127,18 +129,18 @@ int main(int argc, char** argv)
     string question2 = "Quel jour de la semaine est le lundi? (1-7) ";
     string erreur = "Entree non valide";
     int annee = saisieUtilisateur(question1, erreur, BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMALE);
-    int jour = saisieUtilisateur(question2, erreur, 1, 7);
+    int jour = saisieUtilisateur(question2, erreur, BORNE_JOUR_MINIMUM, BORNE_JOUR_MAXIMUM);
     
     affichageAnnee(annee, jour);
     
     
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 
 bool estBissextile(int annee)
 {
-    return (annee % 400 == 0) || ((annee % 4 == 0) && ((annee % 100) != 0));
+    return !(annee % 400) || (!(annee % 4) && ((annee % 100) != 0));
 }
 
 bool jourValide(int jour)
