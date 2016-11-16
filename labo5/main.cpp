@@ -112,7 +112,7 @@ void affichageCentreChaine(string chaine);
  Premier janvier de chaque année, formule valable pour l'annee 1583 à 9999
  La formule utilisée est la suivante: 
  j = [jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12] mod 7
- Source: http://mathforum.org/library/drmath/view/55837.html
+ Source: http://tny.im/7na
  
  
  @param annee(entier) >=1600 et <=3000
@@ -205,8 +205,8 @@ int premierJourJanvier(int annee)
 void affichageCentreChaine(string chaine)
 {
    int longueur = chaine.length(),
-       milieu = ((LARGEUR_COLONNE - longueur) / 2) + longueur,
-       solde = LARGEUR_COLONNE - milieu;
+       milieu = ((LARGEUR_MAX - longueur) / 2) + longueur,
+       solde = LARGEUR_MAX - milieu;
    
    cout << setw(milieu) << chaine << setw(solde) << "" << endl;    
 }
@@ -302,65 +302,80 @@ void affichageAnnee(int annee, int jour)
     //on itère sur tous les mois de l'année
     for(int i = (int)Mois::JANVIER ; i <= (int)Mois::DECEMBRE; i++)
     {
-        // on affiche le nom du mois en cours
+        //on affiche le nom du mois en cours
         affichageCentreMois(i, jour);
-        //on initialise une variable contenant le numéro des jours du mois
+        //on initialise à 1 une variable contenant le numéro des jours du mois
         int numeroJour = 1;
+        //variable booléenne indiquant si on se trouve à la première ligne
         bool premiereLigne = false;
+        //variable booléenne nous permettant de savoir s'il faut rajouter une ligne vide à la fin du mois 
         bool rajoutLigne = false;
         
-        if( i == (int)Mois::FEVRIER)
+        // on affecte à maxJours le nombre de jours correspondant aux mois
+        if(i == (int)Mois::FEVRIER)
         {
+            //maxJours vaudra 29 si c'est une année bissextile et 28 sinon
             maxJours = estBissextile(annee) ? (int)JourParMois::FEVRIER + 1 : (int)JourParMois::FEVRIER;
-        }
-        else if(i==(int)Mois::AVRIL || i==(int)Mois::JUIN || i==(int)Mois::SEPTEMBRE || 
-                i==(int)Mois::NOVEMBRE )
+        }//sinon maxJours vaudra 30 pour les mois d'avril, mai, juin et septembre
+        else if(i==(int)Mois::AVRIL || i==(int)Mois::JUIN || i==(int)Mois::SEPTEMBRE || i==(int)Mois::NOVEMBRE)
         {
             maxJours = 30;
-        }
+        }// sinon pour tous les autres mois maxjours vaut 31
         else
         {
             maxJours = 31;
         }
         
-        for(int li=1 ; li<= 6; li++)
+        //on itère de la première à la sixième ligne
+        for(int li = 1 ; li <= 6; li++)
         {
-            if(li == 1)
-            {
-                premiereLigne = true;
-            }
-            for(int co=1; co<=7; co++)
+            //on affecte true à premiereLigne si on est dans la ligne n°1
+            premiereLigne = (li==1);
+            
+            //on itère sur les 7 colonnes des jours de la semaine
+            for(int co = 1 ; co <= 7 ; co++)
             {   
+                //on déclare un indice de position qui contient le numéro de la position du lundi pour janvier
                 int indicePosition;
+               
+                //on calcule l'indice de la position pour le premier janvier
                 if(i == (int)Mois::JANVIER)
                 {
                     indicePosition = premierJourJanvier(annee) - 1;
                 }
-                else
+                else //sinon on reprend la derniere position du dernier jour du mois précédant
                 {
                     indicePosition = dernierePos + 1;
                 }
+                
+                //on test si l'indice de position vaut 0, alors cela veut dire que l'indice doit être à 7
                 if(!indicePosition)
                 {
                     indicePosition = 7;
                 }
                 
+                //on déclare une nouvelle variable servant à indiquer le numéro de colonne du premier du mois
+                // en fonction de indicePosition
                 int indiceColonne = (i == (int)Mois::JANVIER)? (indicePosition + jour - 1) % 7 : indicePosition;
+                
+                //on doit tester si la valeur égale 0, alors on doit la mettre à 7
                 if(!indiceColonne)
                 {
                     indiceColonne = 7;
                 }
                     
+                //si on se trouve dans la 1ère ligne et que le numéro de colonne est plus petit que l'indice
+                //de la colonne où le premier jour doit être affiché, alors on affiche un blanc
                 if((premiereLigne && co < indiceColonne) )
                 {
                     cout << setw(LARGEUR_COLONNE) << "";
                 }
-                else
+                else//sinon, on doit écrire le jour, ou afficher des blancs après la fin du dernier jour
                 {
                     if(numeroJour <= maxJours)
                     {
-                        if(li==6)
-                            rajoutLigne = true;
+                        //on affecte true à rajoutLigne si on est dans la 6ème ligne
+                        rajoutLigne = (li==6);
                         cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
                         if(numeroJour == maxJours)
