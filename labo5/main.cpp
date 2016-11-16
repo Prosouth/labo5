@@ -107,6 +107,9 @@ void affichageCentreChaine(string chaine);
 
 /**
  Premier janvier de chaque annee formule valable pour l'annee 1583 a 9999
+ La formule utilisée est la suivante: 
+ j = [jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12] mod 7
+ 
  
  @param annee(entier) >=1600 et <=3000
  @return le jour de la semaine correspondant au premier lundi de l'annee(1-7) avec dim=1, lundi=2, etc
@@ -123,14 +126,15 @@ void affichageAnnee(int annee, int jour);
 
 
 
-int main(int argc, char** argv)
+int main()
 {
-    string question1 = "Quelle annee voulez-vous afficher? (1600-3000) ";
-    string question2 = "Quel jour de la semaine est le lundi? (1-7) ";
-    string erreur = "Entree non valide";
-    int annee = saisieUtilisateur(question1, erreur, BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMALE);
-    int jour = saisieUtilisateur(question2, erreur, BORNE_JOUR_MINIMUM, BORNE_JOUR_MAXIMUM);
+    string question1 = "Quelle annee voulez-vous afficher? (1600-3000) ",
+           question2 = "Quel jour de la semaine est le lundi? (1-7) ",
+           erreur = "Entree non valide";
+    int annee, jour;
     
+    annee = saisieUtilisateur(question1, erreur, BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMALE);
+    jour = saisieUtilisateur(question2, erreur, BORNE_JOUR_MINIMUM, BORNE_JOUR_MAXIMUM);   
     affichageAnnee(annee, jour);
     
     
@@ -140,7 +144,7 @@ int main(int argc, char** argv)
 
 bool estBissextile(int annee)
 {
-    return !(annee % 400) || (!(annee % 4) && ((annee % 100) != 0));
+    return !(annee % 400) || (!(annee % 4) && (annee % 100));
 }
 
 bool jourValide(int jour)
@@ -164,16 +168,17 @@ int saisieUtilisateur(string question, string erreur, int valMin, int valMax)
          cin.ignore(numeric_limits<int>::max(), '\n');
          cout << question;   
       }      
-   } while(entree_valide);    
+   } 
+   while(entree_valide);   
+   
    return valeur;
 }
 
 
-// la formule a utiliser est la suivante : j = [ jour + a + a/4 - a/100 + a/400 + 31*m/12 ] mod 7
 int premierJourJanvier(int annee)
 {
     // nombre de jours dans une semaine
-    const int nbJourSemaine = 7;
+    const int NB_JOUR_SEMAINE = 7;
     
     // jour represente le jour dans le mois
     int jour = 1;
@@ -185,7 +190,7 @@ int premierJourJanvier(int annee)
     int a = annee - 1;
     
     // on utilise la formule pour affecter son resultat a la variable premierJour
-    int premierJour = (jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12 ) % nbJourSemaine;
+    int premierJour = (jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12 ) % NB_JOUR_SEMAINE;
     
     // on retourne le resultat de la formule + 1 car on veut obtenir les indices de 1-7 et non pas de 0-6
     return premierJour + 1; 
@@ -194,9 +199,10 @@ int premierJourJanvier(int annee)
 
 void affichageCentreChaine(string chaine)
 {
-   int longueur = chaine.length();
-   int milieu = ((LARGEUR_COLONNE - longueur) / 2) + longueur;
-   int solde = LARGEUR_COLONNE - milieu;
+   int longueur = chaine.length(),
+       milieu = ((LARGEUR_COLONNE - longueur) / 2) + longueur,
+       solde = LARGEUR_COLONNE - milieu;
+   
    cout << setw(milieu) << chaine << setw(solde) << "" << endl;    
 }
 
