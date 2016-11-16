@@ -306,7 +306,7 @@ void affichageAnnee(int annee, int jour)
                     indicePosition = 7;
                 }
                 
-                int indiceColonne = (indicePosition + jour - 1) % 7;
+                int indiceColonne = (i == (int)Mois::JANVIER)? (indicePosition + jour - 1) % 7 : indicePosition;
                 if(!indiceColonne)
                 {
                     indiceColonne = 7;
