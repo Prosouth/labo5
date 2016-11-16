@@ -372,35 +372,38 @@ void affichageAnnee(int annee, int jour)
                 }
                 else//sinon, on doit écrire le jour, ou afficher des blancs après la fin du dernier jour
                 {
+                    //si on a pas atteint le nombre de jours max du mois
                     if(numeroJour <= maxJours)
                     {
                         //on affecte true à rajoutLigne si on est dans la 6ème ligne
                         rajoutLigne = (li==6);
+                        // on affiche le jour avec la largeur adaptée et on incrémente le jour
                         cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
+                        //si on atteint le nombre de jours max, on retient l'indice de la colonne suivante
                         if(numeroJour == maxJours)
                         {
+                            //on utilise modulo 7 car on doit numéroter sur 7 colonnes
                             dernierePos = (co + 1) % 7;
                         }
                     }
-                    else
+                    else //sinon, on affiche des blancs jusqu'à la fin de la ligne
                     {
                         cout << setw(LARGEUR_COLONNE) << "";
                     }
                 }                   
                 
+                //si on est à la fin des 7 colonnes
                 if(co == 7)
                 {
-                    
+                    //on teste si on doit rajouter une ligne à la fin du mois
                     if(rajoutLigne)
-                        cout << endl<< setw(21) << "" << endl;
-                    else
+                        cout << endl<< setw(LARGEUR_MAX) << "" << endl;
+                    else // ou simplement retourner à la ligne 
                         cout << endl;
- 
                     
-                    
-                    if(li==1)
-                        premiereLigne = false;
+                    //si on est à la fin de la première ligne on doit mettre premiereLigne à false
+                    premiereLigne = !premiereLigne;
                 }   
             }
             
