@@ -140,13 +140,14 @@ bool estBissextile(int annee)
 int saisieUtilisateur(const string& question, const string& erreur, int valMin, int valMax)
 {
    int valeur;
-   bool entree_valide = false;
+   bool entree_invalide = false;
    cout << question;   
    
    do
    {
-      entree_valide = (not(cin >> valeur) || (valeur <  valMin ||  valeur > valMax));
-      if (entree_valide)
+      // entrée est invalide si valeur non attendue ou dépasse les bornes
+      entree_invalide = (not(cin >> valeur) || (valeur <  valMin ||  valeur > valMax));
+      if (entree_invalide) // si entrée est invalide, on affiche erreur, vide buffer et affiche question
       {
          cout << erreur << endl;
          cin.clear();
@@ -154,7 +155,7 @@ int saisieUtilisateur(const string& question, const string& erreur, int valMin, 
          cout << question;   
       }      
    } 
-   while(entree_valide);   
+   while(entree_invalide); // tant que l'entrée est invalide, on garde l'utilisateur captif   
    
    return valeur;
 }
@@ -184,9 +185,9 @@ int premierJourJanvier(int annee)
 
 void affichageCentreChaine(const string& chaine)
 {
-   int longueur = chaine.length(),
-       milieu = ((LARGEUR_MAX - longueur) / 2) + longueur,
-       solde = LARGEUR_MAX - milieu;
+   int longueur = chaine.length(), // longueur de la chaine
+       milieu = ((LARGEUR_MAX - longueur) / 2) + longueur, // positionnement au milieu horizontalement
+       solde = LARGEUR_MAX - milieu; // solde de caractère à droite de la chaîne
    
    cout << setw(milieu) << chaine << setw(solde) << "" << endl;    
 }
@@ -356,7 +357,7 @@ void affichageAnnee(int annee, int jour)
                     if(numeroJour <= maxJours)
                     {
                         //on affecte true à rajoutLigne si on est dans la 6ème ligne
-                        rajoutLigne = (lignes == 6);
+                        rajoutLigne = lignes == 6;
                         // on affiche le jour avec la largeur adaptée et on incrémente le jour
                         cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
