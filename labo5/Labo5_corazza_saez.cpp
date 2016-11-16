@@ -1,7 +1,7 @@
 /*
  -----------------------------------------------------------------------------------
  Laboratoire : 5 - Calendrier
- Fichier     : labo5_corazza_saez.cpp
+ Fichier     : Labo5_corazza_saez.cpp
  Auteur(s)   : Corazza Erick, Sebastien Saez
  Date        : 7 Novembre 2016
 
