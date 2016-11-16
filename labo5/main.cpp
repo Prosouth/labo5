@@ -47,13 +47,16 @@ enum class JourParMois
 };
 
 // Constantes 
-const int BORNE_ANNEE_MINIMALE = 1600,
-          BORNE_ANNEE_MAXIMALE = 3000,
-          BORNE_JOUR_MINIMUM = 1,
-          BORNE_JOUR_MAXIMUM = 7,
-          LARGEUR_MOIS = 16,
-          LARGEUR_JOUR_SEMAINE = 3,
-          LARGEUR_COLONNE = 21;
+const int   BORNE_ANNEE_MINIMALE = 1600,
+            BORNE_ANNEE_MAXIMALE = 3000,
+            BORNE_JOUR_MINIMUM = 1,
+            BORNE_JOUR_MAXIMUM = 7,
+            LARGEUR_MOIS = 16,
+            LARGEUR_COLONNE = 3,
+            LARGEUR_MAX = 21,
+            ESPACE_AVANT_ANNEE = 12,
+            ESPACE_APRES_ANNEE = 9;
+          
 
 /**
  L'annee est elle Bissextile
@@ -81,7 +84,7 @@ int saisieUtilisateur(string question, string erreur, int min, int max);
  Affiche l'entete de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
  
  @param mois(entier) le mois à afficher
- @param premierJourSemaine(entier) le jour de la semaine par lequel commence chaque semaine sur le calendrier
+ @param premierJourSemaine(entier) la position du lundi dans les jours de la semaine (1-7)
  */
 void affichageCentreMois(int mois, int premierJourSemaine);
 
@@ -117,7 +120,8 @@ int premierJourJanvier(int annee);
  Affiche le calndrier d'une annee donnee 
  
  @param annee(entier) >=1600 et <=3000 
- @return l'affichage de l'annee
+ @param jour(entier) represente la position du lundi dans la semaine a afficher
+ @return l'affichage du calendrier de l'annee
  */
 void affichageAnnee(int annee, int jour);
 
@@ -195,82 +199,80 @@ int premierJourJanvier(int annee)
 void affichageCentreChaine(string chaine)
 {
    int longueur = chaine.length();
-   int milieu = ((LARGEUR_COLONNE - longueur) / 2) + longueur;
-   int solde = LARGEUR_COLONNE - milieu;
+   int milieu = ((LARGEUR_MAX - longueur) / 2) + longueur;
+   int solde = LARGEUR_MAX - milieu;
    cout << setw(milieu) << chaine << setw(solde) << "" << endl;    
 }
 
 
 void affichageCentreMois(int mois, int premierJourSemaine)
 {    
-   string janvier = "Janvier", fevrier = "Fevrier", mars = "Mars", avril = "Avril",
-          mai = "Mai", juin = "Juin", juillet = "Juillet", aout = "Aout", 
-          septembre = "Septembre", octobre = "Octobre", novembre = "Novembre",
-          decembre = "Decembre";
-   
+ 
+   // on affiche le mois centré correspondant au numéro de mois donné en parametre
     switch(mois)
     {
        case (int)Mois::JANVIER : 
-          affichageCentreChaine(janvier);
+          affichageCentreChaine("Janvier");
           break;
        case (int)Mois::FEVRIER : 
-          affichageCentreChaine(fevrier);
+          affichageCentreChaine("Fevrier");
           break;
        case (int)Mois::MARS : 
-          affichageCentreChaine(mars);
+          affichageCentreChaine("Mars");
           break;
        case (int)Mois::AVRIL : 
-          affichageCentreChaine(avril);
+          affichageCentreChaine("Avril");
           break;
        case (int)Mois::MAI : 
-          affichageCentreChaine(mai);
+          affichageCentreChaine("Mai");
           break;
        case (int)Mois::JUIN : 
-          affichageCentreChaine(juin);
+          affichageCentreChaine("Juin");
           break;
        case (int)Mois::JUILLET : 
-          affichageCentreChaine(juillet);
+          affichageCentreChaine("Juillet");
           break;
        case (int)Mois::AOUT : 
-          affichageCentreChaine(aout);
+          affichageCentreChaine("Aout");
           break;
        case (int)Mois::SEPTEMBRE : 
-          affichageCentreChaine(septembre);
+          affichageCentreChaine("Septembre");
           break;
        case (int)Mois::OCTOBRE: 
-          affichageCentreChaine(octobre);
+          affichageCentreChaine("Octobre");
           break;
        case (int)Mois::NOVEMBRE: 
-          affichageCentreChaine(novembre);
+          affichageCentreChaine("Novembre");
           break;
        case (int)Mois::DECEMBRE: 
-          affichageCentreChaine(decembre);
+          affichageCentreChaine("Decembre");
           break;
     }
     
-    
+    // on affiche l'ordre des jours de la semaine en fonction de la position du lundi(1-7))
     switch(premierJourSemaine)
     {
-        case (int)JourDeLaSemaine::LUNDI - 1:
-            cout << setw(LARGEUR_COLONNE) <<  "  L  M  M  J  V  S  D" << endl;  
+        //Lundi en position 1
+        case 1:
+            cout << setw(LARGEUR_MAX) <<  "  L  M  M  J  V  S  D" << endl;  
             break;
-        case (int)JourDeLaSemaine::MARDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  D  L  M  M  J  V  S"<< endl;
+        case 2:
+            cout << setw(LARGEUR_MAX) << "  D  L  M  M  J  V  S"<< endl;
             break;
-        case (int)JourDeLaSemaine::MERCREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  S  D  L  M  M  J  V"<< endl; 
+        case 3:
+            cout << setw(LARGEUR_MAX) << "  S  D  L  M  M  J  V"<< endl; 
             break;
-        case (int)JourDeLaSemaine::JEUDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  V  S  D  L  M  M  J"<< endl;
+        case 4:
+            cout << setw(LARGEUR_MAX) << "  V  S  D  L  M  M  J"<< endl;
             break;
-        case (int)JourDeLaSemaine::VENDREDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  J  V  S  D  L  M  M"<< endl;
+        case 5:
+            cout << setw(LARGEUR_MAX) << "  J  V  S  D  L  M  M"<< endl;
             break;
-        case (int)JourDeLaSemaine::SAMEDI - 1:
-            cout << setw(LARGEUR_COLONNE) << "  M  J  V  S  D  L  M "<< endl; 
+        case 6:
+            cout << setw(LARGEUR_MAX) << "  M  J  V  S  D  L  M "<< endl; 
             break;
-        case (int)JourDeLaSemaine::DIMANCHE + 6:
-            cout << setw(LARGEUR_COLONNE) << "  M  M  J  V  S  D  L"<< endl; 
+        case 7:
+            cout << setw(LARGEUR_MAX) << "  M  M  J  V  S  D  L"<< endl; 
             break;
         default:
             cout << "Il y a un probleme!" << endl;
@@ -281,13 +283,14 @@ void affichageCentreMois(int mois, int premierJourSemaine)
 
 void affichageAnnee(int annee, int jour)
 {
+    //variable contenant l'indice de la colonne du dernier jour du mois
     int dernierePos;
+    //variable contenant le nombre maximum de jours par mois initialisé à 31 pour Janvier
     int maxJours = 31;
-    int positionPremierJanvier = premierJourJanvier(annee);
     
-    
-    cout << endl << setw(12) << annee << setw(9) << "" << endl;
-    cout << setw(LARGEUR_COLONNE) << "" << endl;
+    //on affiche l'année entrée par l'utilisateur suivi d'une ligne vide
+    cout << endl << setw(ESPACE_AVANT_ANNEE) << annee << setw(ESPACE_APRES_ANNEE) << "" << endl;
+    cout << setw(LARGEUR_MAX) << "" << endl;
     
     for(int i = 1 ; i <= 12; i++)
     {
@@ -340,7 +343,7 @@ void affichageAnnee(int annee, int jour)
                     
                 if((premiereLigne && co < indiceColonne) )
                 {
-                    cout << setw(LARGEUR_JOUR_SEMAINE) << "";
+                    cout << setw(LARGEUR_COLONNE) << "";
                 }
                 else
                 {
@@ -348,7 +351,7 @@ void affichageAnnee(int annee, int jour)
                     {
                         if(li==6)
                             rajoutLigne = true;
-                        cout << setw(LARGEUR_JOUR_SEMAINE) << numeroJour;
+                        cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
                         if(numeroJour == maxJours)
                         {
@@ -357,7 +360,7 @@ void affichageAnnee(int annee, int jour)
                     }
                     else
                     {
-                        cout << setw(LARGEUR_JOUR_SEMAINE) << "";
+                        cout << setw(LARGEUR_COLONNE) << "";
                     }
                 }                   
                 
