@@ -112,8 +112,8 @@ void affichageAnnee(int annee, int jour);
 
 int main(int argc, char** argv)
 {
-    string question1 = "Quelle annee voulez.vous afficher? (1600-3000)";
-    string question2 = "Quel jour de la semaine est le lundi? (1-7)";
+    string question1 = "Quelle annee voulez-vous afficher? (1600-3000) ";
+    string question2 = "Quel jour de la semaine est le lundi? (1-7) ";
     string erreur = "Entree non valide";
     int annee = saisieUtilisateur(question1, erreur, BORNE_ANNEE_MINIMALE, BORNE_ANNEE_MAXIMALE);
     int jour = saisieUtilisateur(question2, erreur, 1, 7);
@@ -140,7 +140,7 @@ int saisieUtilisateur(string question, string erreur, int valMin, int valMax)
 {
    int valeur;
    bool entree_valide = false;
-   cout << question << endl;   
+   cout << question;   
    
    do
    {
@@ -149,7 +149,7 @@ int saisieUtilisateur(string question, string erreur, int valMin, int valMax)
          cout << erreur << endl;
          cin.clear();
          cin.ignore(numeric_limits<int>::max(), '\n');
-         cout << question << endl;   
+         cout << question;   
       }      
    } while(entree_valide);    
    return valeur;
