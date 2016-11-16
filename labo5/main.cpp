@@ -296,7 +296,7 @@ void affichageAnnee(int annee, int jour)
                 }
                 else
                 {
-                    indicePosition = dernierePos - 1;
+                    indicePosition = dernierePos + 1;
                 }
                 if(!indicePosition)
                 {
@@ -309,7 +309,6 @@ void affichageAnnee(int annee, int jour)
                     indiceColonne = 7;
                 }
                     
-                
                 if((premiereLigne && co < indiceColonne) )
                 {
                     cout << setw(LARGEUR_JOUR_SEMAINE) << "";
@@ -336,11 +335,6 @@ void affichageAnnee(int annee, int jour)
                         premiereLigne = false;
                 }   
             }
-            
-            
-                
         }
-
-        
     }
 }
