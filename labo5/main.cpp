@@ -90,6 +90,12 @@ void affichageCentreMois(int mois, int premierJourSemaine);
 void affichageCentreJour(int jour, int premierJourSemaine);
 
 
+
+// A COMMENTER AVEC DOXYGEN
+void affichageCentreChaine(string chaine);
+
+
+
 /**
  Premier janvier de chaque annee
  
@@ -179,47 +185,60 @@ int premierJourJanvier(int annee)
 }
 
 
-void affichageCentreMois(int mois, int premierJourSemaine)
+void affichageCentreChaine(string chaine)
 {
-    cout << setw(LARGEUR_MOIS);
+   int longueur = chaine.length();
+   int milieu = ((LARGEUR_COLONNE - longueur) / 2) + longueur;
+   int solde = LARGEUR_COLONNE - milieu;
+   cout << setw(milieu) << chaine << setw(solde) << "" << endl;    
+}
+
+
+void affichageCentreMois(int mois, int premierJourSemaine)
+{    
+   string janvier = "Janvier", fevrier = "Fevrier", mars = "Mars", avril = "Avril",
+          mai = "Mai", juin = "Juin", juillet = "Juillet", aout = "Aout", 
+          septembre = "Septembre", octobre = "Octobre", novembre = "Novembre",
+          decembre = "Decembre";
+   
     switch(mois)
     {
        case (int)Mois::JANVIER : 
-           cout << "Janvier" << endl;
-           break;
-        case (int)Mois::FEVRIER : 
-           cout << "Fevrier" << endl;
-           break;
-        case (int)Mois::MARS : 
-           cout << "Mars" << endl;
-           break;
-        case (int)Mois::AVRIL : 
-           cout << "Avril" << endl; 
-           break;
-        case (int)Mois::MAI : 
-           cout << "Mai" << endl; 
-           break;
-        case (int)Mois::JUIN : 
-           cout << "Juin"  << endl; 
-           break;
-        case (int)Mois::JUILLET : 
-           cout << "Juillet" << endl; 
-           break;
-        case (int)Mois::AOUT : 
-           cout << "Aout" << endl; 
-           break;
-        case (int)Mois::SEPTEMBRE : 
-           cout << "Septembre" << endl; 
-           break;
-        case (int)Mois::OCTOBRE: 
-           cout << "Octobre" << endl; 
-           break;
-        case (int)Mois::NOVEMBRE: 
-           cout << "Novembre" << endl; 
-           break;
-        case (int)Mois::DECEMBRE: 
-           cout << "Decembre" << endl; 
-           break;
+          affichageCentreChaine(janvier);
+          break;
+       case (int)Mois::FEVRIER : 
+          affichageCentreChaine(fevrier);
+          break;
+       case (int)Mois::MARS : 
+          affichageCentreChaine(mars);
+          break;
+       case (int)Mois::AVRIL : 
+          affichageCentreChaine(avril);
+          break;
+       case (int)Mois::MAI : 
+          affichageCentreChaine(mai);
+          break;
+       case (int)Mois::JUIN : 
+          affichageCentreChaine(juin);
+          break;
+       case (int)Mois::JUILLET : 
+          affichageCentreChaine(juillet);
+          break;
+       case (int)Mois::AOUT : 
+          affichageCentreChaine(aout);
+          break;
+       case (int)Mois::SEPTEMBRE : 
+          affichageCentreChaine(septembre);
+          break;
+       case (int)Mois::OCTOBRE: 
+          affichageCentreChaine(octobre);
+          break;
+       case (int)Mois::NOVEMBRE: 
+          affichageCentreChaine(novembre);
+          break;
+       case (int)Mois::DECEMBRE: 
+          affichageCentreChaine(decembre);
+          break;
     }
     
     
