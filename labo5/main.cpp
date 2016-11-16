@@ -45,7 +45,9 @@ const int   BORNE_ANNEE_MINIMALE = 1600,
             NB_JOUR_FEVRIER_BISSEXTILE = 29,
             NB_JOUR_FEVRIER_NORMAL = 28,
             NB_JOUR_MOIS_CREUX = 30,
-            NB_JOUR_MOIS_PLEIN = 31;
+            NB_JOUR_MOIS_PLEIN = 31,
+            NB_MAX_LIGNES = 6,
+            NB_MAX_COLONNES = 7;
           
 /**
  L'année est-elle bissextile?
@@ -305,13 +307,13 @@ void affichageAnnee(int annee, int jour)
         }
         
         //on itère de la première à la sixième ligne
-        for(int li = 1; li <= 6; li++)
+        for(int lignes = 1; lignes <= NB_MAX_LIGNES; lignes++)
         {
             //on affecte true à premiereLigne si on est dans la ligne n°1
-            premiereLigne = li == 1;
+            premiereLigne = lignes == 1;
             
             //on itère sur les 7 colonnes des jours de la semaine
-            for(int co = 1; co <= 7; co++)
+            for(int colonnes = 1; colonnes <= NB_MAX_COLONNES; colonnes++)
             {   
                 //on déclare un indice de position qui contient le numéro de la position du lundi pour janvier
                 int indicePosition;
@@ -344,7 +346,7 @@ void affichageAnnee(int annee, int jour)
                     
                 //si on se trouve dans la 1ère ligne et que le numéro de colonne est plus petit que l'indice
                 //de la colonne où le premier jour doit être affiché, alors on affiche un blanc
-                if((premiereLigne && co < indiceColonne) )
+                if((premiereLigne && colonnes < indiceColonne) )
                 {
                     cout << setw(LARGEUR_COLONNE) << "";
                 }
@@ -354,7 +356,7 @@ void affichageAnnee(int annee, int jour)
                     if(numeroJour <= maxJours)
                     {
                         //on affecte true à rajoutLigne si on est dans la 6ème ligne
-                        rajoutLigne = (li == 6);
+                        rajoutLigne = (lignes == 6);
                         // on affiche le jour avec la largeur adaptée et on incrémente le jour
                         cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
@@ -362,7 +364,7 @@ void affichageAnnee(int annee, int jour)
                         if(numeroJour == maxJours)
                         {
                             //on utilise modulo 7 car on doit numéroter sur 7 colonnes
-                            dernierePos = (co + 1) % 7;
+                            dernierePos = (colonnes + 1) % 7;
                         }
                     }
                     else //sinon, on affiche des blancs jusqu'à la fin de la ligne
@@ -372,7 +374,7 @@ void affichageAnnee(int annee, int jour)
                 }                   
                 
                 //si on est à la fin des 7 colonnes
-                if(co == 7)
+                if(colonnes == 7)
                 {
                     //on teste si on doit rajouter une ligne à la fin du mois
                     if(rajoutLigne)
