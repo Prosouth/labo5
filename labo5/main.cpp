@@ -56,7 +56,7 @@ const int BORNE_ANNEE_MINIMALE = 1600,
           LARGEUR_COLONNE = 21;
 
 /**
- L'annee est elle Bissextile
+ L'année est-elle bissextile?
  
  @param n entier >=1600 et <=3000 
  
@@ -66,19 +66,19 @@ bool estBissextile(int annee);
 
 
 /**
- Demande les valeurs a l'utilisateur et verifie la saisie
+ Demande les valeurs à l'utilisateur et verifie la saisie
  
- @param question(string) demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
- @param erreur(string) message d'erreur en cas d'entree(s) non valide
- @param min(entier) definit le nombre mimimum a entrer
- @param min(entier) definit le nombre maximum a entrer
+ @param question(string) demande à l'utilisateur d'entrer une année et un jour de la semaine (1-7)
+ @param erreur(string) message d'erreur en cas d'entrée(s) non valide(s)
+ @param min(entier) définit le nombre mimimum à entrer
+ @param min(entier) définit le nombre maximum à entrer
  @return la saisie correcte
  */
 int saisieUtilisateur(string question, string erreur, int min, int max);
 
 
 /**
- Affiche l'entete de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
+ Affiche l'entête de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
  
  @param mois(entier) le mois à afficher
  @param premierJourSemaine(entier) le jour de la semaine par lequel commence chaque semaine sur le calendrier
@@ -99,16 +99,17 @@ void affichageCentreJour(int jour, int premierJourSemaine);
 /**
  Affiche une unique chaine de manière centrée sur 21 caractères
  
- @param chaine (string) la chaine qu'on veut centrer 
+ @param chaîne (string) la chaine qu'on veut centrer 
  */
 void affichageCentreChaine(string chaine);
 
 
 
 /**
- Premier janvier de chaque annee formule valable pour l'annee 1583 a 9999
+ Premier janvier de chaque année, formule valable pour l'annee 1583 à 9999
  La formule utilisée est la suivante: 
  j = [jour + a + a / 4 - a / 100 + a / 400 + 31 * m / 12] mod 7
+ Source: http://mathforum.org/library/drmath/view/55837.html
  
  
  @param annee(entier) >=1600 et <=3000
