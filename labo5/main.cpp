@@ -268,7 +268,7 @@ void affichageAnnee(int annee, int jour)
         affichageCentreMois(i, jour);
         int numeroJour = 1;
         bool premiereLigne = false;
-        
+        bool rajoutLigne = false;
         
         if( i == (int)Mois::FEVRIER)
         {
@@ -320,6 +320,8 @@ void affichageAnnee(int annee, int jour)
                 {
                     if(numeroJour <= maxJours)
                     {
+                        if(li==6)
+                            rajoutLigne = true;
                         cout << setw(LARGEUR_JOUR_SEMAINE) << numeroJour;
                         numeroJour++;
                         if(numeroJour == maxJours)
@@ -331,22 +333,24 @@ void affichageAnnee(int annee, int jour)
                     {
                         cout << setw(LARGEUR_JOUR_SEMAINE) << "";
                     }
-                }  
-                
-                 
+                }                   
                 
                 if(co == 7)
                 {
-                    cout << endl;
                     
-                    if(li == 6 && jour>=maxJours)
-                    {
+                    if(rajoutLigne)
+                        cout << endl<< setw(21) << "" << endl;
+                    else
                         cout << endl;
-                    }
+ 
+                    
+                    
                     if(li==1)
                         premiereLigne = false;
                 }   
             }
+            
+            
         }
     }
 }
