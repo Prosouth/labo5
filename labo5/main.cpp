@@ -30,6 +30,7 @@ enum class JourDeLaSemaine
 {
    DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI
 };
+
 // Enum des mois de l'année avec janvier = 1 et decembre = 12 pour respecter
 // les conventions usuelles
 enum class Mois 
