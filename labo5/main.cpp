@@ -32,13 +32,6 @@ enum class Mois
    OCTOBRE, NOVEMBRE, DECEMBRE
 };
 
-enum class JourParMois 
-{
-   JANVIER = 31, FEVRIER = 28, MARS = 31, AVRIL = 30, MAI = 31, JUIN = 30, 
-   JUILLET = 31, AOUT = 31, SEPTEMBRE = 30, OCTOBRE = 31, NOVEMBRE = 30,
-   DECEMBRE = 31
-};
-
 // Constantes 
 const int   BORNE_ANNEE_MINIMALE = 1600,
             BORNE_ANNEE_MAXIMALE = 3000,
@@ -48,7 +41,9 @@ const int   BORNE_ANNEE_MINIMALE = 1600,
             LARGEUR_COLONNE = 3,
             LARGEUR_MAX = 21,
             ESPACE_AVANT_ANNEE = 12,
-            ESPACE_APRES_ANNEE = 9;
+            ESPACE_APRES_ANNEE = 9,
+            JOUR_FEVRIER_BISSEXTILE = 29,
+            JOUR_FEVRIER_NORMAL = 28;
           
 /**
  L'année est-elle bissextile?
@@ -68,7 +63,7 @@ bool estBissextile(int annee);
  @param max(entier) définit le nombre maximum à entrer
  @return la saisie correcte
  */
-int saisieUtilisateur(string question, string erreur, int min, int max);
+int saisieUtilisateur(const string& question, const string& erreur, int min, int max);
 
 /**
  Affiche l'entête de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
@@ -91,7 +86,7 @@ void affichageCentreJour(int jour, int premierJourSemaine);
  
  @param chaîne (string) la chaine qu'on veut centrer 
  */
-void affichageCentreChaine(string chaine);
+void affichageCentreChaine(const string& chaine);
 
 /**
  Affiche le calndrier d'une annee donnee 
@@ -138,13 +133,7 @@ bool estBissextile(int annee)
 }
 
 
-bool jourValide(int jour)
-{
-    return (jour > 0 && jour <= 7) ? true : false;
-}
-
-
-int saisieUtilisateur(string question, string erreur, int valMin, int valMax)
+int saisieUtilisateur(const string& question, const string& erreur, int valMin, int valMax)
 {
    int valeur;
    bool entree_valide = false;
@@ -152,7 +141,8 @@ int saisieUtilisateur(string question, string erreur, int valMin, int valMax)
    
    do
    {
-      if (entree_valide = (not(cin >> valeur) || (valeur <  valMin ||  valeur > valMax)))
+      entree_valide = (not(cin >> valeur) || (valeur <  valMin ||  valeur > valMax));
+      if (entree_valide)
       {
          cout << erreur << endl;
          cin.clear();
@@ -188,7 +178,7 @@ int premierJourJanvier(int annee)
 }
 
 
-void affichageCentreChaine(string chaine)
+void affichageCentreChaine(const string& chaine)
 {
    int longueur = chaine.length(),
        milieu = ((LARGEUR_MAX - longueur) / 2) + longueur,
@@ -301,9 +291,9 @@ void affichageAnnee(int annee, int jour)
         if(i == (int)Mois::FEVRIER)
         {
             //maxJours vaudra 29 si c'est une année bissextile et 28 sinon
-            maxJours = estBissextile(annee) ? (int)JourParMois::FEVRIER + 1 : (int)JourParMois::FEVRIER;
+            maxJours = estBissextile(annee) ? JOUR_FEVRIER_BISSEXTILE: JOUR_FEVRIER_NORMAL;
         }//sinon maxJours vaudra 30 pour les mois d'avril, mai, juin et septembre
-        else if(i==(int)Mois::AVRIL || i==(int)Mois::JUIN || i==(int)Mois::SEPTEMBRE || i==(int)Mois::NOVEMBRE)
+        else if(i == (int)Mois::AVRIL || i == (int)Mois::JUIN || i == (int)Mois::SEPTEMBRE || i == (int)Mois::NOVEMBRE)
         {
             maxJours = 30;
         }// sinon pour tous les autres mois maxjours vaut 31
