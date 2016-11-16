@@ -13,7 +13,7 @@
 
  Remarque(s) : 
 
- Compilateur : g++ 
+ Compilateur : g++ 6.2.1 20160830
  -----------------------------------------------------------------------------------
  */
 #include <cstdlib>
@@ -23,13 +23,6 @@
 #include <limits>
 
 using namespace std;
-
-// Enum des jours de la semaine avec dimanche ayant la valeur de 1 
-// jusqu'a 7 pour samedi
-enum class JourDeLaSemaine 
-{
-   DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI
-};
 
 // Enum des mois de l'année avec janvier = 1 et decembre = 12 pour respecter
 // les conventions usuelles
@@ -57,7 +50,6 @@ const int   BORNE_ANNEE_MINIMALE = 1600,
             ESPACE_AVANT_ANNEE = 12,
             ESPACE_APRES_ANNEE = 9;
           
-
 /**
  L'année est-elle bissextile?
  
@@ -66,7 +58,6 @@ const int   BORNE_ANNEE_MINIMALE = 1600,
  @return true or false
  */
 bool estBissextile(int annee);
-
 
 /**
  Demande les valeurs à l'utilisateur et verifie la saisie
@@ -79,7 +70,6 @@ bool estBissextile(int annee);
  */
 int saisieUtilisateur(string question, string erreur, int min, int max);
 
-
 /**
  Affiche l'entête de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
  
@@ -87,7 +77,6 @@ int saisieUtilisateur(string question, string erreur, int min, int max);
  @param premierJourSemaine(entier) la position du lundi dans les jours de la semaine (1-7)
  */
 void affichageCentreMois(int mois, int premierJourSemaine);
-
 
 /**
  Affiche et centre correctement les jours du mois
@@ -97,8 +86,6 @@ void affichageCentreMois(int mois, int premierJourSemaine);
  */
 void affichageCentreJour(int jour, int premierJourSemaine);
 
-
-
 /**
  Affiche une unique chaine de manière centrée sur 21 caractères
  
@@ -106,6 +93,14 @@ void affichageCentreJour(int jour, int premierJourSemaine);
  */
 void affichageCentreChaine(string chaine);
 
+/**
+ Affiche le calndrier d'une annee donnee 
+ 
+ @param annee(entier) >=1600 et <=3000 
+ @param jour(entier) represente la position du lundi dans la semaine a afficher
+ @return l'affichage du calendrier de l'annee
+ */
+void affichageAnnee(int annee, int jour);
 
 
 /**
@@ -119,16 +114,6 @@ void affichageCentreChaine(string chaine);
  @return le jour de la semaine correspondant au premier lundi de l'annee(1-7) avec dim=1, lundi=2, etc
  */
 int premierJourJanvier(int annee);
-
-/**
- Affiche le calndrier d'une annee donnee 
- 
- @param annee(entier) >=1600 et <=3000 
- @param jour(entier) represente la position du lundi dans la semaine a afficher
- @return l'affichage du calendrier de l'annee
- */
-void affichageAnnee(int annee, int jour);
-
 
 
 int main()
@@ -151,6 +136,7 @@ bool estBissextile(int annee)
 {
     return !(annee % 400) || (!(annee % 4) && (annee % 100));
 }
+
 
 bool jourValide(int jour)
 {
@@ -256,14 +242,14 @@ void affichageCentreMois(int mois, int premierJourSemaine)
           break;
     }
     
-    // on affiche l'ordre des jours de la semaine en fonction de la position du lundi(1-7))
+    // on affiche l'ordre des jours de la semaine en fonction de la position du lundi(1-7)
     switch(premierJourSemaine)
     {
         //Lundi en position 1
         case 1:
             cout << setw(LARGEUR_MAX) <<  "  L  M  M  J  V  S  D" << endl;  
             break;
-        case 2:
+        case 2: // Lundi en position 2, etc...
             cout << setw(LARGEUR_MAX) << "  D  L  M  M  J  V  S"<< endl;
             break;
         case 3:
@@ -376,7 +362,7 @@ void affichageAnnee(int annee, int jour)
                     if(numeroJour <= maxJours)
                     {
                         //on affecte true à rajoutLigne si on est dans la 6ème ligne
-                        rajoutLigne = (li==6);
+                        rajoutLigne = (li == 6);
                         // on affiche le jour avec la largeur adaptée et on incrémente le jour
                         cout << setw(LARGEUR_COLONNE) << numeroJour;
                         numeroJour++;
@@ -398,16 +384,17 @@ void affichageAnnee(int annee, int jour)
                 {
                     //on teste si on doit rajouter une ligne à la fin du mois
                     if(rajoutLigne)
-                        cout << endl<< setw(LARGEUR_MAX) << "" << endl;
+                    {
+                        cout << endl << setw(LARGEUR_MAX) << "" << endl;
+                    }
                     else // ou simplement retourner à la ligne 
+                    {
                         cout << endl;
-                    
+                    }
                     //si on est à la fin de la première ligne on doit mettre premiereLigne à false
                     premiereLigne = !premiereLigne;
                 }   
             }
-            
-            
         }
     }
 }
