@@ -65,7 +65,7 @@ bool estBissextile(int annee);
  @param question(string) demande à l'utilisateur d'entrer une année et un jour de la semaine (1-7)
  @param erreur(string) message d'erreur en cas d'entrée(s) non valide(s)
  @param min(entier) définit le nombre mimimum à entrer
- @param min(entier) définit le nombre maximum à entrer
+ @param max(entier) définit le nombre maximum à entrer
  @return la saisie correcte
  */
 int saisieUtilisateur(string question, string erreur, int min, int max);
