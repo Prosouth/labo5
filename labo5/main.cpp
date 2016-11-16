@@ -16,7 +16,6 @@
  Compilateur : g++ 
  -----------------------------------------------------------------------------------
  */
-
 #include <cstdlib>
 #include <string>
 #include <iostream>
@@ -25,13 +24,14 @@
 
 using namespace std;
 
-// on crée une énumération des jours de la semaine avec dimanche ayant la valeur de 1 
+// Enum des jours de la semaine avec dimanche ayant la valeur de 1 
 // jusqu'a 7 pour samedi
 enum class JourDeLaSemaine 
 {
    DIMANCHE = 1, LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI
 };
-
+// Enum des mois de l'année avec janvier = 1 et decembre = 12 pour respecter
+// les conventions usuelles
 enum class Mois 
 {
    JANVIER = 1, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, 
@@ -53,7 +53,7 @@ const int BORNE_ANNEE_MINIMALE = 1600,
           LARGEUR_COLONNE = 21;
 
 /**
- l'annee est elle Bissextile
+ L'annee est elle Bissextile
  
  @param n entier >=1600 et <=3000 
  
@@ -63,7 +63,7 @@ bool estBissextile(int annee);
 
 
 /**
- demande les valeurs a l'utilisateur et verifie la saisie
+ Demande les valeurs a l'utilisateur et verifie la saisie
  
  @param question(string) demande a l'utilisateur d'entrer une annnee et un jour de la semaine (1-7)
  @param erreur(string) message d'erreur en cas d'entree(s) non valide
@@ -76,6 +76,7 @@ int saisieUtilisateur(string question, string erreur, int min, int max);
 
 /**
  Affiche l'entete de chaque mois avec le nom du mois et l'ordre des jours dans la semaine
+ 
  @param mois(entier) le mois à afficher
  @param premierJourSemaine(entier) le jour de la semaine par lequel commence chaque semaine sur le calendrier
  */
@@ -84,6 +85,7 @@ void affichageCentreMois(int mois, int premierJourSemaine);
 
 /**
  Affiche et centre correctement les jours du mois
+ 
  @param jour(entier) le jour a afficher
  @param premierJourSemaine(entier) le jour de la semaine par lequel commence chaque semaine sur le calendrier
  */
@@ -91,24 +93,26 @@ void affichageCentreJour(int jour, int premierJourSemaine);
 
 
 
-// A COMMENTER AVEC DOXYGEN
+/**
+ Affiche une unique chaine de manière centrée sur 21 caractères
+ 
+ @param chaine (string) la chaine qu'on veut centrer 
+ */
 void affichageCentreChaine(string chaine);
 
 
 
 /**
- Premier janvier de chaque annee
+ Premier janvier de chaque annee formule valable pour l'annee 1583 a 9999
  
- * formule valable pour l'annee 1583 a 9999
- @param annee(entier) >=1600 et <=3000 
- 
+ @param annee(entier) >=1600 et <=3000
  @return le jour de la semaine correspondant au premier lundi de l'annee(1-7) avec dim=1, lundi=2, etc
  */
 int premierJourJanvier(int annee);
 
 /**
- * Affiche le calndrier d'une annee donnee 
- * 
+ Affiche le calndrier d'une annee donnee 
+ 
  @param annee(entier) >=1600 et <=3000 
  @return l'affichage de l'annee
  */
