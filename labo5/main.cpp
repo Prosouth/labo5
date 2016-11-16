@@ -267,9 +267,9 @@ void affichageAnnee(int annee, int jour)
         bool premiereLigne = false;
         
         
-        if(estBissextile(annee) && i == 2)
+        if( i == (int)Mois::FEVRIER)
         {
-            maxJours = (int)JourParMois::FEVRIER + 1;
+            maxJours = estBissextile(annee) ? (int)JourParMois::FEVRIER + 1 : (int)JourParMois::FEVRIER;
         }
         else if(i==(int)Mois::AVRIL || i==(int)Mois::JUIN || i==(int)Mois::SEPTEMBRE || 
                 i==(int)Mois::NOVEMBRE )
