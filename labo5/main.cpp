@@ -323,7 +323,9 @@ void affichageAnnee(int annee, int jour)
                         cout << setw(LARGEUR_JOUR_SEMAINE) << numeroJour;
                         numeroJour++;
                         if(numeroJour == maxJours)
+                        {
                             dernierePos = (co + 1) % 7;
+                        }
                     }
                     else
                     {
@@ -331,9 +333,16 @@ void affichageAnnee(int annee, int jour)
                     }
                 }  
                 
+                 
+                
                 if(co == 7)
                 {
                     cout << endl;
+                    
+                    if(li == 6 && jour>=maxJours)
+                    {
+                        cout << endl;
+                    }
                     if(li==1)
                         premiereLigne = false;
                 }   
