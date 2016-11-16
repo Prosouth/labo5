@@ -299,9 +299,12 @@ void affichageAnnee(int annee, int jour)
     cout << endl << setw(ESPACE_AVANT_ANNEE) << annee << setw(ESPACE_APRES_ANNEE) << "" << endl;
     cout << setw(LARGEUR_MAX) << "" << endl;
     
-    for(int i = 1 ; i <= 12; i++)
+    //on itère sur tous les mois de l'année
+    for(int i = (int)Mois::JANVIER ; i <= (int)Mois::DECEMBRE; i++)
     {
+        // on affiche le nom du mois en cours
         affichageCentreMois(i, jour);
+        //on initialise une variable contenant le numéro des jours du mois
         int numeroJour = 1;
         bool premiereLigne = false;
         bool rajoutLigne = false;
