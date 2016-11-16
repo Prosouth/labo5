@@ -260,6 +260,9 @@ void affichageAnnee(int annee, int jour)
     int positionPremierJanvier = premierJourJanvier(annee);
     
     
+    cout << endl << setw(12) << annee << setw(9) << endl;
+    cout << setw(LARGEUR_COLONNE) << endl;
+    
     for(int i = 1 ; i <= 12; i++)
     {
         affichageCentreMois(i, jour);
