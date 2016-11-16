@@ -73,7 +73,7 @@ int saisieUtilisateur(const string& question, const string& erreur, int min, int
  @param mois(entier) le mois à afficher
  @param premierJourSemaine(entier) la position du lundi dans les jours de la semaine (1-7)
  */
-void affichageCentreMois(int mois, int premierJourSemaine);
+void affichageEnteteMois(int mois, int premierJourSemaine);
 
 /**
  Affiche et centre correctement les jours du mois
@@ -190,7 +190,7 @@ void affichageCentreChaine(const string& chaine)
 }
 
 
-void affichageCentreMois(int mois, int premierJourSemaine)
+void affichageEnteteMois(int mois, int premierJourSemaine)
 {    
  
    // on affiche le mois centré correspondant au numéro de mois donné en parametre
@@ -281,7 +281,7 @@ void affichageAnnee(int annee, int jour)
     for(int i = (int)Mois::JANVIER; i <= (int)Mois::DECEMBRE; i++)
     {
         //on affiche le nom du mois en cours
-        affichageCentreMois(i, jour);
+        affichageEnteteMois(i, jour);
         //on initialise à 1 une variable contenant le numéro des jours du mois
         int numeroJour = 1;
         //variable booléenne indiquant si on se trouve à la première ligne
@@ -305,13 +305,13 @@ void affichageAnnee(int annee, int jour)
         }
         
         //on itère de la première à la sixième ligne
-        for(int li = 1 ; li <= 6; li++)
+        for(int li = 1; li <= 6; li++)
         {
             //on affecte true à premiereLigne si on est dans la ligne n°1
-            premiereLigne = (li==1);
+            premiereLigne = li == 1;
             
             //on itère sur les 7 colonnes des jours de la semaine
-            for(int co = 1 ; co <= 7 ; co++)
+            for(int co = 1; co <= 7; co++)
             {   
                 //on déclare un indice de position qui contient le numéro de la position du lundi pour janvier
                 int indicePosition;
@@ -334,7 +334,7 @@ void affichageAnnee(int annee, int jour)
                 
                 //on déclare une nouvelle variable servant à indiquer le numéro de colonne du premier du mois
                 // en fonction de indicePosition
-                int indiceColonne = (i == (int)Mois::JANVIER)? (indicePosition + jour - 1) % 7 : indicePosition;
+                int indiceColonne = (i == (int)Mois::JANVIER) ? (indicePosition + jour - 1) % 7 : indicePosition;
                 
                 //on doit tester si la valeur égale 0, alors on doit la mettre à 7
                 if(!indiceColonne)
